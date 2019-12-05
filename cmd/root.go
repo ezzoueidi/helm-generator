@@ -30,9 +30,9 @@ var cfgFile string
 var rootCmd = &cobra.Command{
 	Use:   "helm-generator",
 	Short: "Helm-generator, generates your helm charts and structure them in a fancy way!",
-	Long: `To use helm-generator you may want to use --help to have general overview of
-		what you can do. Helm-generator is a Golang binary and it will try to organize your
-		helm charts in a fancy way.`,
+	Long: `To use helm-generator you may want to use --help to have general overview of 
+what you can do. Helm-generator is a Golang binary and it will try to organize your
+helm charts in a fancy way.`,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -49,7 +49,7 @@ func init() {
 
 	//rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.helm-generator.yaml)")
 
-	rootCmd.Flags().BoolP("--help", "-h", false, "To fill")
+	//rootCmd.Flags().BoolP("--help", "h", false, "To fill")
 }
 
 // initConfig reads in config file and ENV variables if set.

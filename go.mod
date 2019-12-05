@@ -1,4 +1,4 @@
-module helm-generator
+module github.com/nzoueidi/helm-generator
 
 go 1.13
 
