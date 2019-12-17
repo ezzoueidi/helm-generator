@@ -1,5 +1,5 @@
 /*
-Copyright © 2019 Naeil Ezzoueidi naeil@nzoueidi.com
+Copyright © 2019 NAME HERE <EMAIL ADDRESS>
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21,28 +21,28 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// lsCmd represents the ls command
-var lsCmd = &cobra.Command{
-	Use:   "ls",
-	Short: "List your installed helm charts",
+// upgradeCmd represents the upgrade command
+var upgradeCmd = &cobra.Command{
+	Use:   "upgrade",
+	Short: "Upgrade your charts",
 	Long: `
-List your deployed or/and failed charts, also you can 
-list your helm charts with the fromat your like (JSON or YAML).`,
+Uprade your deployed helm charts, also you can upgrade
+your Tiller deployment in your remote k8s cluster.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("List called")
+		fmt.Println("upgrade called")
 	},
 }
 
 func init() {
-	rootCmd.AddCommand(lsCmd)
+	rootCmd.AddCommand(upgradeCmd)
 
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// lsCmd.PersistentFlags().String("foo", "", "A help for foo")
+	// upgradeCmd.PersistentFlags().String("foo", "", "A help for foo")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// lsCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// upgradeCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

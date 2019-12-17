@@ -19,6 +19,8 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 	"os"
+	"os/exec"
+	"runtime"
 )
 
 //var debug int
@@ -33,10 +35,28 @@ otherwise it will install them for you.`,
 
 	Run: func(cmd *cobra.Command, args []string) {
 		//section for debug implementation
-		if _, err := os.Stat(os.Getenv("HOME") + "/.helm/"); os.IsNotExist(err) {
-			fmt.Println("your home dir is")
+		if runtime.GOOS == "linux" {
+			helmFolder := "/home/nzoueidi/.helm" // TODO will be filled as environment variable
+			if stat, err := os.Stat(helmFolder); err == nil && stat.IsDir() /*&& isInstalled("helm")*/ {
+				//helm is installed and initialized - nothing todo
+				fmt.Println("Helm is installed and inited")
+			} else {
+				fmt.Println("test not valid")
+				fmt.Println(helmFolder)
+
+			}
+
 		}
+
 	},
+}
+
+func isInstalled(toolname string) bool {
+	cmd := exec.Command("command", "-v", toolname)
+	if err := cmd.Run(); err != nil {
+		return false
+	}
+	return true
 }
 
 func init() {

@@ -16,23 +16,82 @@ limitations under the License.
 package cmd
 
 import (
+	"bufio"
 	"fmt"
-
 	"github.com/spf13/cobra"
+	"log"
+	"os"
+	"strconv"
+	//"os/exec"
 )
 
 // installCmd represents the install command
 var installCmd = &cobra.Command{
 	Use:   "install",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Short: "Install your helm charts",
+	Long: `
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+Helm-generator generates for you your helm charts
+with an interactive shell to fill all your environment
+variables.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("install called")
+		//fmt.Println("install called")
+		// get the name of the repository
+		scanner_repo := bufio.NewScanner(os.Stdin)
+		fmt.Print("Enter the name of the folder: ")
+		scanner_repo.Scan()
+		repo := scanner_repo.Text()
+		obj, err := os.Open(".")
+		if err != nil {
+			log.Fatalf("failed opening directory: %s", err)
+		}
+		defer obj.Close()
+		list, _ := obj.Readdirnames(0)
+		for _, name := range list {
+			if name == repo {
+				scanner_answer := bufio.NewScanner(os.Stdin)
+				fmt.Print("It looks like there is a folder already with that name. \nDo you want me to use it? [Y/n]: ")
+				scanner_answer.Scan()
+				answer := scanner_answer.Text()
+				if answer == "Y" || answer == "y" {
+					if _, err := os.Stat(".git/"); err != nil {
+						if os.IsNotExist(err) {
+							scanner_git := bufio.NewScanner(os.Stdin)
+							fmt.Println("This folder is not a git repository. \n Do you want me ")
+						} else {
+							// other error
+						}
+					}
+
+				} else if answer == "N" || answer == "n" {
+
+				}
+			}
+
+		}
+		// scans the number of charts
+		scanner_chart := bufio.NewScanner(os.Stdin)
+		fmt.Print("How much helm charts you'd like to create? : ")
+		scanner_chart.Scan()
+		number_charts := scanner_chart.Text()
+		nb_chart, err := strconv.Atoi(number_charts)
+		arr := make([]string, 0)
+		if len(number_charts) != 0 && err == nil {
+			for i := 1; i <= nb_chart; i++ {
+				scanner_nb := bufio.NewScanner(os.Stdin)
+				fmt.Print("Enter the name of the ", i, " chart: ")
+				scanner_nb.Scan()
+				name_chart := scanner_nb.Text()
+				if len(name_chart) != 0 && err == nil {
+					arr = append(arr, name_chart)
+				}
+			}
+
+		} else if len(number_charts) != 0 && err != nil {
+			fmt.Println("You have entered a non integer value for your charts!")
+		}
+		//create the folder and files needed for the helm charts
+
 	},
 }
 
