@@ -1,0 +1,33 @@
+{{set . "title" "Helm generator UI"}}
+{{template "header.html" .}}
+
+<header>
+	 <div class="topnav">
+  <a href="/">Home</a>
+  <a href="/App/Helm">Helm Charts</a>
+  <a href="/App/Contact">Contact</a>
+  <a class="active" href="/App/About">About</a>
+	 </div>
+</header>
+<br/> <br/> <br/>
+<center>
+	<h3>
+		Helm Generator is an open-source project <br/> 
+Proudly developed by Revel, Golang, Html and Javascript. <br/>
+It aims to help developers and devops create and deploy their own helm charts. <br/>
+You can check the code source in <a href=""> </a> and if you would like to contribute you are more than welcome. :)<br/>
+	</h3>
+</center>
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="span6">
+      {{template "flash.html" .}}
+    </div>
+  </div>
+</div>
+
+
+{{template "footer.html" .}}

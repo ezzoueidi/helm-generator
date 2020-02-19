@@ -1,0 +1,52 @@
+{{set . "title" "Helm Charts"}}
+{{template "header.html" .}}
+
+<header>
+	 <div class="topnav">
+  <a href="/">Home</a>
+  <a class="active" href="/App/Helm">Helm Charts</a>
+  <a href="/App/Contact">Contact</a>
+  <a href="/App/About">About</a>
+	 </div>
+</header>
+<br/>
+<br/> <br/>
+
+{{if .errors}}<b>Please fix errors marked below!</b>{{end}}
+
+<form action="/App/Helm">
+	<div>
+		<br/>
+		<b><i>This form is to fill, so you can install and deploy your own helm charts.</i></b> <br/>
+		<br/><br/>
+
+		Chart Name: &nbsp;<input type="text" name="chart_name" id="" /> &nbsp; Frontend: &nbsp;<input type="radio" name="chart_type" value=""/> &nbsp; Backend: &nbsp; <input type="radio" name="chart_type" value=""/> &nbsp; <input type="button" value="add" id="add" />
+		<div id="container_append"> &nbsp; &nbsp; </div> &nbsp; &nbsp; &nbsp;
+	</div>
+	Docker image: &nbsp; <input type="text" name="" id="" value="" /> &nbsp; <input type="button" value="add" id="add"/><br/>
+	<div id="container_append"> &nbsp; &nbsp; </div>
+	<br/>
+	Environment variables: &nbsp; <textarea name="Text1" cols="40" rows="5"></textarea> <br/> <br/>
+	Secret name: &nbsp; <input type="text" name="" id=""/> &nbsp; &nbsp; Secret Value: &nbsp; <input type="password" name="secret" id=""/> &nbsp; <input type="button" value="add" id="add"><br/><br/>
+	SSL/TLS &nbsp; Yes: <input type="radio" name="ssl" id="" value=""/> &nbsp; No <input type="radio" name="ssl" id="" value="" /> <br/>
+		<div id="container_append"> &nbsp; &nbsp; </div> 
+		Do you want to use ingress?&nbsp; &nbsp; Yes <input type="radio" onclick="javascript:yesnoCheck();" id="yesCheck"  name="ingress" value=""> &nbsp; &nbsp; No <input type="radio" onclick="javascript:yesnoCheck();" name="ingress" id="noCheck" value=""><br/><br/>
+		<div id="ifYes" style="display:none">
+			Ingres URL: &nbsp; <input type='text' id='yes' name='yes'><br><br/>
+   		 </div>
+		 Namespace: &nbsp; <input type="text" id="" name="" value="" /><br/><br/>
+		 Kubeconfig: &nbsp; <input type="file" id="" name="kubeconfig" value="" /> <br/><br/>
+		 <center> <input type="submit" id="" value="submit" formaction="/"/> &nbsp; &nbsp; <input type="button" id="" value="cancel" /> </center>
+	
+</form>
+
+
+<div class="container">
+  <div class="row">
+    <div class="span6">
+      {{template "flash.html" .}}
+    </div>
+  </div>
+</div>
+
+{{template "footer.html" .}}
